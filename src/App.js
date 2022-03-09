@@ -113,7 +113,9 @@ function App() {
 
   return (
     <div className="App">  
-      <Slide slide={SLIDES[slideIndex.x][slideIndex.y]} />
+      <div className="slidesContainer">
+        <Slide slide={SLIDES[slideIndex.x][slideIndex.y]} />
+      </div>
     </div>
   );
 }
