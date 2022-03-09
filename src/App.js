@@ -50,14 +50,15 @@ function Slide({slide}) {
 
 function App() {
 
-  const [slideIndex, setSlideIndex] = useState({
-    x: 0,
-    y: 0
+  const [slideIndex, setSlideIndex] = useState(() => {
+    return {
+      x: 0,
+      y: 0
+    }
   });
 
   useEffect(() => {
     document.addEventListener("keydown", handleKeyboard);
-    console.log('test');
     return () => {
       document.removeEventListener("keydown", handleKeyboard);
     }
@@ -67,30 +68,46 @@ function App() {
     switch (e.keyCode) {
       case KEYCODES.LEFT_ARROW:
         console.log('←');
-        if (slideIndex.x > 0) {
-          setSlideIndex({x: slideIndex.x - 1, y: 0});
-        }
+        setSlideIndex(({x, y}) => {
+          let [newX, newY] = x > 0 ? [x - 1, 0] : [x, y]; 
+          return {
+            x: newX,
+            y: newY
+          }
+        });
         break;
       case KEYCODES.RIGHT_ARROW:
         console.log('→');
-        if (slideIndex.x < SLIDES.length - 1) {
-          setSlideIndex({x: slideIndex.x + 1, y: 0});
-        }
+        setSlideIndex(({x, y}) => {
+          let [newX, newY] = x < SLIDES.length - 1 ? [x + 1, 0] : [x, y]; 
+          return {
+            x: newX,
+            y: newY
+          }
+        });
         break;
       case KEYCODES.UP_ARROW:
         console.log('↑');
-        if (slideIndex.y > 0) {
-          setSlideIndex({x: slideIndex.x, y: slideIndex.y - 1});
-        }
+        setSlideIndex(({x, y}) => {
+          let [newX, newY] = y > 0 ? [x, y - 1] : [x, y]; 
+          return {
+            x: newX,
+            y: newY
+          }
+        });
         break;
       case KEYCODES.DOWN_ARROW:
         console.log('↓');
-        if (slideIndex.y < SLIDES[slideIndex.x].length - 1) {
-          setSlideIndex({x: slideIndex.x, y: slideIndex.y + 1});
-        }
+        setSlideIndex(({x, y}) => {
+          let [newX, newY] = y < SLIDES[x].length - 1 ? [x, y + 1] : [x, y]; 
+          return {
+            x: newX,
+            y: newY
+          }
+        });
         break;
       default: 
-        console.log(e.keyCode);
+        console.log(`Keycode '${e.keyCode}' not supported`);
     }
   }
 
