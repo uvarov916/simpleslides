@@ -12,6 +12,7 @@
   height: 300px;
   border-radius: 8px;
   overflow: hidden;
+  position: relative;
 }
 
 .slide {
@@ -22,6 +23,30 @@
   justify-content: center;
   align-items: center;
   background-color: beige;
+}
+
+.progressBar {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  padding-bottom: 4px;
+}
+
+.progressBar_circle {
+  margin: 4px;
+  width: 16px;
+  height: 16px;
+  border-radius: 8px;
+}
+
+.progressBar_circle-inactive {
+  background-color: rgba(0,0,0,0.3);
+}
+
+.progressBar_circle-active {
+  background-color: rgba(0,0,0,0.8);
 }
 
 .App-logo {

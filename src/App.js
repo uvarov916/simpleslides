@@ -48,6 +48,18 @@ function Slide({slide}) {
   )
 }
 
+function ProgressBar({totalCount, currentIndex}) {
+  return (
+    <div className="progressBar">
+      {[...Array(totalCount)].map((x, i) => {
+        return (
+          <span className={`progressBar_circle progressBar_circle-${i == currentIndex ? 'active' : 'inactive'}`}></span>
+        )
+      })}
+    </div>
+  )
+}
+
 function App() {
 
   const [slideIndex, setSlideIndex] = useState(() => {
@@ -115,6 +127,7 @@ function App() {
     <div className="App">  
       <div className="slidesContainer">
         <Slide slide={SLIDES[slideIndex.x][slideIndex.y]} />
+        <ProgressBar totalCount={3} currentIndex={slideIndex.x} />
       </div>
     </div>
   );
